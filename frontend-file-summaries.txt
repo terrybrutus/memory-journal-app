@@ -1,0 +1,18 @@
+{
+  "frontend/src/App.tsx": "Main application component with router setup for timeline and shared memory pages, wrapped with theme and query providers.",
+  "frontend/src/pages/Timeline.tsx": "Timeline page with Internet Identity authentication, profile setup flow, and memory management; shows login prompt for unauthenticated users.",
+  "frontend/src/components/Header.tsx": "Application header with VHS branding and Internet Identity login/logout button.",
+  "frontend/src/components/Footer.tsx": "Footer component with attribution and link to caffeine.ai.",
+  "frontend/src/components/VHSOverlay.tsx": "Component rendering VHS visual effects including scanlines, noise, and vignette overlays.",
+  "frontend/src/components/EmptyState.tsx": "Empty state component shown when no memories exist or no search results found, with call-to-action button.",
+  "frontend/src/components/SearchAndFilters.tsx": "Search and filter controls for memories including tags, categories, content types, and favorites toggle.",
+  "frontend/src/components/MemoryCard.tsx": "Memory card component with favorite, share, edit, and delete actions; includes share dialog for generating secure links with view/edit permissions.",
+  "frontend/src/components/MediaViewer.tsx": "Media viewer component with carousel functionality for displaying images, videos, and audio files with playback controls.",
+  "frontend/src/components/CreateMemoryDialog.tsx": "Dialog for creating new memory entries with file upload, tag/category management, form validation, and proper file type mapping from extensions to FileType enum values.",
+  "frontend/src/components/EditMemoryDialog.tsx": "Dialog for editing existing memory entries with ability to modify all fields, manage media files, and proper file type mapping from extensions to FileType enum values.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations including user profile management, memory CRUD, and shared link functionality with proper cache invalidation.",
+  "frontend/src/index.css": "Global styles with VHS aesthetic including subtle scanlines, RGB offset, and retro typography; removed all shaking/glitch-on-hover effects and adjusted opacity values for better WCAG contrast compliance while maintaining the vintage VHS look.",
+  "frontend/src/pages/SharedMemory.tsx": "Shared memory view page that displays a memory accessed via a shareable link with read-only or edit capabilities.",
+  "frontend/src/components/ProfileSetupDialog.tsx": "Modal dialog for first-time user profile setup, requiring name input before accessing the app.",
+  "frontend/src/components/EditSharedMemoryDialog.tsx": "Dialog for adding media files to a shared memory when the user has edit permissions via a shared link."
+}

@@ -1,0 +1,119 @@
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UserProfile = record {name: text;};
+type Time = int;
+type Tag = 
+ record {
+   id: text;
+   name: text;
+ };
+type RSVP = 
+ record {
+   attending: bool;
+   inviteCode: text;
+   name: text;
+   timestamp: Time;
+ };
+type Permissions = 
+ record {
+   canEdit: bool;
+   canView: bool;
+ };
+type MemoryEntry = 
+ record {
+   caption: text;
+   category: text;
+   contentType: ContentType;
+   id: text;
+   isFavorite: bool;
+   mediaFiles: vec MediaFile;
+   notes: text;
+   tags: vec text;
+   timestamp: int;
+ };
+type MediaFile = 
+ record {
+   fileHash: text;
+   fileName: text;
+   filePath: text;
+   fileType: FileType;
+   id: text;
+ };
+type InviteCode = 
+ record {
+   code: text;
+   created: Time;
+   used: bool;
+ };
+type FileType = 
+ variant {
+   jpeg;
+   jpg;
+   m4a;
+   mp3;
+   mp4;
+   png;
+   wav;
+ };
+type FileReference = 
+ record {
+   hash: text;
+   path: text;
+ };
+type ContentType = 
+ variant {
+   audio;
+   photo;
+   screenshot;
+   "text";
+   video;
+ };
+type Category = 
+ record {
+   id: text;
+   name: text;
+ };
+service : {
+  accessSharedMemory: (linkId: text) -> (opt MemoryEntry) query;
+  addCategory: (name: text) -> (text);
+  addTag: (name: text) -> (text);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  createMemoryEntry: (caption: text, notes: text, tags: vec text, category:
+   text, mediaFiles: vec MediaFile, contentType: ContentType) -> (text);
+  createSharedLink: (memoryId: text, permissions: Permissions, expires:
+   opt int) -> (text);
+  deleteMemoryEntry: (id: text) -> (bool);
+  dropFileReference: (path: text) -> ();
+  editSharedMemory: (linkId: text, updatedMemory: MemoryEntry) -> ();
+  filterByCategory: (category: text) -> (vec MemoryEntry) query;
+  filterByContentType: (contentType: ContentType) -> (vec MemoryEntry) query;
+  filterByTag: (tag: text) -> (vec MemoryEntry) query;
+  generateInviteCode: () -> (text);
+  getAllCategories: () -> (vec Category) query;
+  getAllMemories: () -> (vec MemoryEntry) query;
+  getAllRSVPs: () -> (vec RSVP) query;
+  getAllTags: () -> (vec Tag) query;
+  getCallerUserProfile: () -> (opt UserProfile) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getFavorites: () -> (vec MemoryEntry) query;
+  getFileReference: (path: text) -> (FileReference) query;
+  getInviteCodes: () -> (vec InviteCode) query;
+  getMemoryEntry: (id: text) -> (opt MemoryEntry) query;
+  getUserProfile: (user: principal) -> (opt UserProfile);
+  initializeAccessControl: () -> ();
+  isCallerAdmin: () -> (bool) query;
+  listFileReferences: () -> (vec FileReference) query;
+  registerFileReference: (path: text, hash: text) -> ();
+  revokeSharedLink: (linkId: text) -> ();
+  saveCallerUserProfile: (profile: UserProfile) -> ();
+  searchMemories: (searchTerm: text) -> (vec MemoryEntry) query;
+  submitRSVP: (name: text, attending: bool, inviteCode: text) -> ();
+  toggleFavorite: (id: text) -> (bool);
+  updateMemoryEntry: (id: text, caption: text, notes: text, tags: vec text,
+   category: text, mediaFiles: vec MediaFile, contentType: ContentType) ->
+   (bool);
+}
